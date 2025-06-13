@@ -47,12 +47,28 @@ function expenseAdd(newExpense){
     expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`)
     expenseIcon.setAttribute("alt", newExpense.category_name)
     
-    expenseItem.append(expenseIcon)
-    expenseList.append(expenseItem)
-
-    const expenseInfo = document.createElement("info")
+    const expenseInfo = document.createElement("div")
     expenseInfo.classList.add("expense-info")
+    
+    const expenseName = document.createElement("strong")
+    expenseName.textContent = newExpense.expense
 
+    const expenseCategory = document.createElement("span")
+    expenseCategory.textContent = newExpense.category_name
+
+    const expenseAmount = document.createElement("span")
+    expenseAmount.classList.add("expense-amount")
+    expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount.toUpperCase().replace("R$", "")}`
+
+    const removeIcon = document.createElement("img")
+    removeIcon.classList.add("remove-icon")
+    removeIcon.setAttribute("src", "img/remove.svg")
+    removeIcon.setAttribute("alt", "remover")
+    
+    
+    expenseItem.append(expenseIcon, expenseInfo, expenseAmount, removeIcon)
+    expenseList.append(expenseItem)
+    expenseInfo.append(expenseName, expenseCategory)
   } catch (error) {
     alert("ALgo deu errado na adição da despesa!")
     console.log("falhou")  
